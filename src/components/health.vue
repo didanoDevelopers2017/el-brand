@@ -1,0 +1,62 @@
+<template>
+  <div class="healthtable">
+    <el-table :data="items">
+      <el-table-column prop="studentName" label="姓 名" align="center"></el-table-column>
+      <el-table-column prop="className" label="班 级" align="center"></el-table-column>
+      <el-table-column prop="created" label="到校时间" align="center">
+        <template scope="scope">
+          <span>{{getState(scope)}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="specialReasons" label="特殊情况" align="center"></el-table-column>
+      <el-table-column prop="specialCare" label="特别照顾" align="center"></el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+export default {
+  props:['items'],
+  methods: {
+    getState(scope) {
+      return scope.row.created?scope.row.created:'未到校'
+    }
+  }
+}
+</script>
+
+<style>
+.healthtable {
+  width: 100%;
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+.healthtable .el-table {
+  border: 0;
+  margin-right: 200px;
+  background-color:#FDF5E6;
+  height:520px;
+}
+
+.healthtable .el-table::before {
+  background-color: #FDF5E6
+}
+
+.healthtable .el-table__header-wrapper thead div {
+  background-color: #FDF5E6
+}
+
+.healthtable .el-table th {
+  background-color: #FDF5E6
+}
+
+.healthtable .el-table td,
+.el-table th.is-leaf {
+  border: 0;
+}
+
+.healthtable .el-table tr {
+  background-color: #FDF5E6
+}
+</style>
