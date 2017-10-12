@@ -185,6 +185,14 @@ export default {
         window.console.log(error)
       })
     },
+    getCurrentStudentAway() {
+      this.$http.post(`${IPCode}/base/electronicbrand/post/findNewAwayRecord/${this.code}`).then((response) => {
+        response = response.data;
+        if(response.success && response.data.num > 0){
+          this.checksData_1 = this.checksData_1.concat(response.data.list);
+        }
+      })
+    },
     //连接websocket
     connect() {
         let self = this;
@@ -223,7 +231,11 @@ export default {
       }
       if (format(newVal, 'HH:mm:ss') >= '12:00:00' && this.flag != 2) {
         clearInterval(this.setIntervalObg.checkDataObg);
-        this.connect();
+        this.connect();---方案一
+        // this.getCurrentStudentAway();------方案二
+        // setInterval(function(){
+        //   self.getCurrentStudentAway();
+        // },5000)
         this.flag = 2
         this.currentview = currentview[1]
         this.change = change[1]
