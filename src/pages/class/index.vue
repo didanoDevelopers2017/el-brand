@@ -231,8 +231,10 @@ export default {
       }
       if (format(newVal, 'HH:mm:ss') >= '12:00:00' && this.flag != 2) {
         clearInterval(this.setIntervalObg.checkDataObg);
-        this.connect();---方案一
-        // this.getCurrentStudentAway();------方案二
+        // -------方案一
+        this.connect();
+        // ------方案二
+        // this.getCurrentStudentAway();
         // setInterval(function(){
         //   self.getCurrentStudentAway();
         // },5000)
