@@ -1,7 +1,7 @@
 <template>
 	<div class="outBox_2">
 	    <div v-show="offlineShow" id="offlineShow_1">
-	      <img src="static/img/网络异常1920-1080-1.jpg" style="margin:auto">
+	      <img src="static/img/offline.jpg" style="margin:auto">
 	    </div>
 		<div class="room">
 			<p class="roomtitle">{{classs}}</p>

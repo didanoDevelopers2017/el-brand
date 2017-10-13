@@ -35,3 +35,18 @@
 	margin:auto;
 	background-size:100% 100%;
 }
+#outBox_1 .el-table__header-wrapper thead div{
+  background-color: #fff
+}
+#outBox_1 .el-table th{
+  background-color: #fff
+}
+#outBox_1 .el-table,#outBox_1 .el-table td{
+  border:0
+}
+.outBox_2 .room .el-table th.is-leaf{
+  border:0
+}
+.outBox_3 .kitchen .el-table th.is-leaf{
+  border:0
+}
