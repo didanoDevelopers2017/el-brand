@@ -63,6 +63,7 @@ export default {
       currentview: currentview[0],
       change:change[0],
       nowtime: '',
+      newdate: format(new Date, 'YYYY- MM - DD'),
       currentPage: 1,
       pageInfo: {
         pageSize: 7,
@@ -75,6 +76,8 @@ export default {
       setIntervalObg:{
         checkDataObg:'',
       },
+      isConnect: false,
+      isFirst: false
     }
   },
   components: {
@@ -100,6 +103,7 @@ export default {
       let self = this
       setTimeout(() => {
         self.nowtime = new Date()
+        // self.newdate = format(new Date, 'YYYY - MM - DD')
         self.getNowTime()
       }, 60*1000)
     },
@@ -109,6 +113,7 @@ export default {
       teacherCharm(this.authorization,this.code, res => {
         self.techershow = res.data.data.list
       }, error => {
+        self.showData()
         window.console.log(error)
       })
     },
@@ -165,6 +170,7 @@ export default {
             $("iframe").attr("src", html_src);
           });
         }, error => {
+          self.staffPush()
           window.console.log(error)
         })
     },
@@ -188,56 +194,74 @@ export default {
     getCurrentStudentAway() {
       this.$http.post(`${IPCode}/base/electronicbrand/post/findNewAwayRecord/${this.code}`).then((response) => {
         response = response.data;
-        if(response.success && response.data.num > 0){
-          this.checksData_1 = this.checksData_1.concat(response.data.list);
+        if(response.success){
+          console.log(response.data.num);
+          this.isConnect = true;
+          // this.checksData_1 = this.checksData_1.concat(response.data.list);
+          this.checksData_1 = response.data.list;
         }
       })
     },
+    sensms() {
+      this.ws.send("is connect");
+    },
     //连接websocket
     connect() {
-        let self = this;
-        self.ws = new WebSocket(`ws://${WsIp}/electronicbrand/ws/${this.code}`);
-        //打开websocket，使用ws协议
-        self.ws.onopen = function (event) {
-            console.log("已经与服务器建立了连接\r\n当前连接状态：");
-        };
-        self.ws.onmessage = function(event) {
-          let currentArr = JSON.parse(event.data);
-          if(!currentArr.type) {
-            self.isShow = false;
-            let checksArr = new Array();
-            checksArr['classId'] = currentArr['classId'];
-            checksArr['studentName'] = currentArr['studentName'];
-            checksArr['parentName'] = currentArr['relationTitle'];
-            checksArr['created'] = currentArr['time'];
-            self.checksData_1.push(checksArr);
-          }
-        };
-        self.ws.onerror = function () {
-          self.connect();
-        };
-        self.ws.onclose = function(event){
-          console.log("已经与服务器断开了连接");
-          self.connect();
-        };
-      },
+      this.isConnect = true
+      let self = this;
+      self.ws = new WebSocket(`ws://${WsIp}/electronicbrand/ws/${this.code}`);
+      //打开websocket，使用ws协议
+      self.ws.onopen = function (event) {
+          console.log("已经与服务器建立了连接\r\n当前连接状态：");
+      };
+      self.ws.onmessage = function(event) {
+        console.log(event.data);
+        let currentArr = JSON.parse(event.data);
+        if(!currentArr.type) {
+          self.isShow = false;
+          let checksArr = new Array();
+          checksArr['classId'] = currentArr['classId'];
+          checksArr['studentName'] = currentArr['studentName'];
+          checksArr['parentName'] = currentArr['relationTitle'];
+          checksArr['created'] = currentArr['time'];
+          self.checksData_1.push(checksArr);
+        }
+      };
+      self.ws.onerror = function () {
+        self.isConnect = false
+        self.connect();
+      };
+      self.ws.onclose = function(event){
+        self.isConnect = false
+        console.log("已经与服务器断开了连接");
+        self.connect();
+      };
+    },
+    setGetCurrentStudentAway() {
+      let self = this
+      setInterval(function(){
+        self.getCurrentStudentAway();
+      },5000)
+    }
   },
   watch: {
     nowtime: function(newVal, oldVal) {
-      if ('10:30:00' > format(newVal, 'HH:mm:ss')) {
+      if ('12:00:00' > format(newVal, 'HH:mm:ss')) {
         this.flag = 1
         this.currentview = currentview[0]
         this.change = change[0]
       }
-      if (format(newVal, 'HH:mm:ss') >= '10:30:00') {
+      if (format(newVal, 'HH:mm:ss') >= '12:00:00') {
         clearInterval(this.setIntervalObg.checkDataObg);
         // -------方案一
-        this.connect();
+        // this.connect();
+        // this.sensms();
         // ------方案二
-        // this.getCurrentStudentAway();
-        // setInterval(function(){
-        //   self.getCurrentStudentAway();
-        // },5000)
+        if(!this.isFirst) {
+          this.getCurrentStudentAway();
+          this.setGetCurrentStudentAway();
+        }
+        this.isFirst = true;
         this.flag = 2
         this.currentview = currentview[1]
         this.change = change[1]

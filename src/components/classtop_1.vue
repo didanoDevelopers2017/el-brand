@@ -1,7 +1,7 @@
 <template>
 	<div class="classtop">
 	  <marquee id="list" scrollamount="15" scrolldelay="200">
-	    <font size=+1 color=#fff v-for="(item, index) in checksData" :key="index">{{ item.studentName }}在 {{ item.created }} 被{{ item.parentName }}接走</font>
+	    <font size=+1 color=#fff v-for="(item, index) in checksData" :key="index">{{ item.studentName }}在 {{ item.time }} 被{{ item.relationTitle }}接走</font>
 	  </marquee>
 	  <div class="classname">{{moroing.className}}</div>
 	</div>
