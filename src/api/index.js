@@ -2,7 +2,7 @@ import 'babel-polyfill'
 
 import axios from 'axios'
 
-const IPCode = 'http://119.23.152.164:8657'
+const IPCode = 'http://119.23.152.164:8557'
 
 /**
  * 公共的接口调用方法

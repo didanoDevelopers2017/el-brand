@@ -101,7 +101,7 @@ export default {
       setTimeout(() => {
         self.nowtime = new Date()
         self.getNowTime()
-      }, 3000)
+      }, 60*1000)
     },
     // 教师风采
     showData() {
@@ -224,12 +224,12 @@ export default {
   },
   watch: {
     nowtime: function(newVal, oldVal) {
-      if ('12:00:00' > format(newVal, 'HH:mm:ss') && this.flag != 1) {
+      if ('10:30:00' > format(newVal, 'HH:mm:ss')) {
         this.flag = 1
         this.currentview = currentview[0]
         this.change = change[0]
       }
-      if (format(newVal, 'HH:mm:ss') >= '12:00:00' && this.flag != 2) {
+      if (format(newVal, 'HH:mm:ss') >= '10:30:00') {
         clearInterval(this.setIntervalObg.checkDataObg);
         // -------方案一
         this.connect();
@@ -272,15 +272,6 @@ export default {
         this.checkData()
       },setTimeoutsort)
 
-    //处理网络异常（断网），查询不到数据
-    window.addEventListener('offline', function() {
-      console.log('offLine')
-      $("#offlineShow").show()
-    })
-    window.addEventListener('online', function() {
-      console.log('onLine')
-      window.location.reload();
-    })
     //文章内容大于外框时，向上滚动
     $(document).ready(function (){
       ddd()
@@ -302,6 +293,15 @@ export default {
     };
     }
 }
+//处理网络异常（断网），查询不到数据
+window.addEventListener('offline', function() {
+  console.log('offLine')
+  $("#offlineShow").show()
+})
+window.addEventListener('online', function() {
+  console.log('onLine')
+  window.location.reload();
+})
 </script>
 
 <style lang="scss">
@@ -311,6 +311,9 @@ export default {
 }
 .index{
 	height: 100%;
+}
+img{
+  width: 100%
 }
 #offlineShow{
   img{

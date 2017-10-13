@@ -32,6 +32,8 @@ export default {
       let self = this
       setTimeout(() => {
         self.nowtime = format(new Date, 'hh:mm')
+        self.noweek = format(new Date, 'EEEE')
+        self.newdate = format(new Date, 'YYYY - MM - DD')
         self.getNowTime()
       }, 1000 * 60)
     }

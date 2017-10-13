@@ -90,17 +90,17 @@ import statistical from '@/components/statistical'
 				self.fetchData()
 				self.getData()
 			},setTimeoutsort)
-		    //处理网络异常（断网），查询不到数据
-		    window.addEventListener('offline', function() {
-		      console.log('offLine')
-		      $("#offlineShow_1").show()
-		    })
-		    window.addEventListener('online', function() {
-		      console.log('onLine')
-		      window.location.reload();
-		    })
 	    }
 	}
+	//处理网络异常（断网），查询不到数据
+	window.addEventListener('offline', function() {
+		console.log('offLine')
+		$("#offlineShow_1").show()
+	})
+	window.addEventListener('online', function() {
+		console.log('onLine')
+		window.location.reload();
+	})
 </script>
 <style>
 	.outBox_2{
