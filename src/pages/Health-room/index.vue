@@ -34,7 +34,7 @@ import statistical from '@/components/statistical'
 				currentPage: 1,
 				offlineShow:false,
 		      	pageInfo: {
-			        pageSize: 11,
+			        pageSize: 20,
 			        pageTotal: 1
 		      	},
 		      	authorization: this.$route.query.authorization,
@@ -50,7 +50,7 @@ import statistical from '@/components/statistical'
 		      	}
 		      	setTimeout(() => {
 		        	self.getAutoCurentPage()
-		      	}, 4500)
+		      	}, 60*1000)
 		    },
 		    //获取列表数据
 			fetchData(){
@@ -115,16 +115,15 @@ import statistical from '@/components/statistical'
 	}
 	.dAta{
 		background-color: #FDF5E6;
-		margin: 40px;
+		margin: 0 30px;
 		border-radius:10px;
 		border:1px solid #eee8aa;
 	}
 	.Tongji{
 		text-align: left;
 		border-bottom: 1px solid #ccc;
-		padding-bottom: 20px;
+		padding-bottom: 10px;
 		padding-left: 8%;
-		padding-top: 1.5%
 	}
 	.roomtitle{
 		line-height: 210px;

@@ -47,7 +47,7 @@ import classfooter_1 from '@/components/classfooter_1'//footer
 
 const currentview = ['chenjiandata', 'leavedata']
 const change = ['classtop','classtop_1']
-
+const checklist = ['getCurentPageList_3']
 export default {
   name: 'index',
   data() {
@@ -66,7 +66,7 @@ export default {
       newdate: format(new Date, 'YYYY- MM - DD'),
       currentPage: 1,
       pageInfo: {
-        pageSize: 7,
+        pageSize: 30,
         pageTotal: 1
       },
       flag: 0,
@@ -77,7 +77,7 @@ export default {
         checkDataObg:'',
       },
       isConnect: false,
-      isFirst: false
+      isFirst: false,
     }
   },
   components: {
@@ -89,6 +89,7 @@ export default {
     classfooter_1,
   },
   methods: {
+    //当前页自增
     getAutoCurentPage: function() {
       let self = this
       this.currentPage++
@@ -97,7 +98,7 @@ export default {
       }
       setTimeout(() => {
         self.getAutoCurentPage()
-      }, 4500)
+      }, 60*1000)
     },
     getNowTime: function() {
       let self = this
@@ -181,6 +182,7 @@ export default {
       findAwayRecord(this.authorization,this.code, res => {
         let list = res.data.data.list
         self.checksData = list
+        // self.$refs.studentDetection.check();
       }, error => {
         window.console.log(error)
       })
@@ -241,7 +243,7 @@ export default {
       let self = this
       setInterval(function(){
         self.getCurrentStudentAway();
-      },5000)
+      },20*1000)
     }
   },
   watch: {
@@ -277,13 +279,23 @@ export default {
     },
   },
   computed: {
+        //获取当前页数据
     getCurentPageList: function() {
       return getEveryPageList(this.checksData, this.currentPage, this.pageInfo)
-
-    }
+      // var b = getEveryPageList(this.checksData, 2, this.pageInfo)
+      // var c = getEveryPageList(this.checksData, 3, this.pageInfo)
+      // var e = getEveryPageList(this.checksData, 4, this.pageInfo)
+      // var d = [a,b,c,e]
+      // console.log(d)
+      // return a
+      // 2 getEveryPageList(this.checksData, 2, this.pageInfo)
+      // 3 getEveryPageList(this.checksData, 3, this.pageInfo)
+      // list = [1,2,3]  // 1 list[0] 
+    },
   },
   created() {
       let self = this
+      // console.log(this.getCurentPageList_1)
       this.getNowTime()
       this.checkData()
       this.showData()
@@ -293,7 +305,7 @@ export default {
         self.staffPush()
       },setTimeoutLong);
       this.setIntervalObg.checkDataObg = setInterval(function(){
-        this.checkData()
+        self.checkData()
       },setTimeoutsort)
 
     //文章内容大于外框时，向上滚动
@@ -317,15 +329,15 @@ export default {
     };
     }
 }
-//处理网络异常（断网），查询不到数据
-window.addEventListener('offline', function() {
-  console.log('offLine')
-  $("#offlineShow").show()
-})
-window.addEventListener('online', function() {
-  console.log('onLine')
-  window.location.reload();
-})
+  //处理网络异常（断网），查询不到数据
+  window.addEventListener('offline', function() {
+    console.log('offLine')
+    $("#offlineShow").show()
+  })
+  window.addEventListener('online', function() {
+    console.log('onLine')
+    window.location.reload();
+  })
 </script>
 
 <style lang="scss">
@@ -358,17 +370,17 @@ img{
 .show_left {
   float: left;
   width: 29%;
-  height: 440px;
+  height: 470px;
   background-color: #fff;
-  padding: 20px 0px;
+  padding: 10px 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .show_right {
   float: right;
   width: 66%;
-  height: 440px;
+  height: 470px;
   background-color: #fff;
-  padding: 20px 0px;
+  padding: 10px 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -426,7 +438,7 @@ img{
     border: 1px solid #eee;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    margin-top:20px
+    margin-top:10px
 }
 .title {
   text-align: center;

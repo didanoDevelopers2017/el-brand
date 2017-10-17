@@ -28,15 +28,17 @@ export default {
 <style>
 .healthtable {
   width: 100%;
-  margin-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 
 .healthtable .el-table {
   border: 0;
   margin-right: 200px;
   background-color:#FDF5E6;
-  height:520px;
+  height:680px;
+}
+.healthtable .el-table td{
+  height: 30px
 }
 
 .healthtable .el-table::before {

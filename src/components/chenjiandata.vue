@@ -2,14 +2,18 @@
   <div class="show_right">
     <div class="title">{{title}}</div>
     <div class="tb_left">
-      <el-table :data="checksData">
-        <el-table-column prop="studentName" label="姓 名" align="left" style="background-color:#fff"></el-table-column>
+      <!-- 信息尽量在一页显示 -->
+      <ul id="datalist">
+        <li :class="getArriveClass(item)" v-for="item in checksData">{{ item.studentName }}({{ func(item) }})</li>
+      </ul>
+      <!-- <el-table :data="checksData[2]" :show-header="false"> -->
+<!--         <el-table-column prop="studentName" label="姓 名" align="left" style="background-color:#fff"></el-table-column>
         <el-table-column prop="created" label="到校时间" align="center">
           <template scope="scope">
               <span>{{getState(scope)}}</span>
-            </template>
+          </template>
         </el-table-column>
-      </el-table>
+      </el-table> -->
     </div>
     <h4 id="tongji">
       当前 {{cldata.className}} 总人数 {{cldata.studentNumber}} 人 已到 {{cldata.schoolNumber}} 人 未到 {{cldata.beforeNumber}} 人
@@ -26,10 +30,24 @@ export default {
   },
   props: ['checksData', 'cldata'],
   methods: {
-    getState(scope) {
-      return scope.row.created ? scope.row.created : '未到校'
+    // getState (scope) {
+    //   //数据重组
+    //   return `${scope.row.studentName}(${scope.row.created ? scope.row.created : '未到校'})`
+    // },
+    func (item) {
+      if(item.created == null){
+        return item.created = '未到校'
+      }
+      return item.created
+    },
+    getArriveClass (item) {
+      if(item.created != '未到校') {
+        return ['test']
+      } else {
+        return []
+      }
     }
-  }
+  },
 }
 </script>
 
@@ -37,22 +55,43 @@ export default {
 .bothData {
 /*  margin-top: 1%*/
 }
+.test{
+  color: #3a7ae2 !important;
+}
+#datalist{
+  float: left;
+  padding:10px 25px 0 30px;
+  text-align: justify all;
+  height: 358px
+}
+#datalist li{
+  color: #222;
+  line-height: 36px;
+  list-style: none;
+  float: left;
+  margin-right: 35px;
+  width: 167px;
+}
 
 .tb_left {
   float: left;
   width: 100%;
   margin-bottom: 20px;
+  border-bottom: 1px solid #222
 }
 
 #tongji {
   text-align: left;
-  margin-top: 20px;
-  margin-bottom: 2%;
-  padding: 2%
+  padding: 0 10px;
+  font-weight: bold;
 }
-.tb_left .el-table{
-  height: 350px;
+/*.tb_left .el-table{
+  height: 365px;
+  padding-top: 5px;
   text-align: justify;
+}
+.tb_left .cell{
+	padding: 0 15px
 }
 
 .tb_left .el-table__header-wrapper {
@@ -65,12 +104,8 @@ export default {
   background: #fff
 }
 
-.tb_left .el-table__body-wrapper {
-  padding: 1% 4%;
-}
-
 .el-table__row {
-  height: 40px;
+  height: 20px;
   border-bottom: none;
 }
 
@@ -116,5 +151,5 @@ thead {
 
 .el-table__header-wrapper thead div {
   background-color: #fff;
-}
+}*/
 </style>

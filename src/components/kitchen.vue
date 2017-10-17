@@ -30,8 +30,7 @@ export default {
 <style>
 .healthtable {
   width: 100%;
-  margin-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   height:100%;
 }
 
@@ -39,10 +38,10 @@ export default {
   border: 0;
   margin-right: 100px;
   background-color:#FDF5E6;
-  height: 520px;
+  height: 680px;
 }
 .healthtable .el-table td{
-  height: 40px;
+  height: 30px;
 }
 
 .healthtable .el-table::before {
