@@ -60,7 +60,7 @@ export default {
 }
 #datalist{
   float: left;
-  padding:10px 25px 0 30px;
+  padding:0 25px 0 30px;
   text-align: justify all;
   height: 358px
 }
@@ -76,15 +76,15 @@ export default {
 .tb_left {
   float: left;
   width: 100%;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #222
+  /*margin-bottom: 20px;*/
+  /*border-bottom: 1px solid #222*/
 }
 
-#tongji {
+/*#tongji {
   text-align: left;
   padding: 0 10px;
   font-weight: bold;
-}
+}*/
 /*.tb_left .el-table{
   height: 365px;
   padding-top: 5px;

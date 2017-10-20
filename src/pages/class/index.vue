@@ -11,7 +11,8 @@
             <show :showdata="techershow"></show>
           </transition>
           <transition name="fade" mode="out-in"><!-- 晨检/接送数据 -->
-            <component v-bind:is="currentview" id="TableS" :checksData="getCurentPageList" :cldata="cldata"></component>
+            <studentList :checksData="checksData_2" :cldata="cldata"></studentList>
+            <!-- <component v-bind:is="currentview" id="TableS" :checksData="getCurentPageList" :cldata="cldata"></component> -->
           </transition>
           <div style="clear:both"></div>
         </div>
@@ -37,12 +38,13 @@
 </template>
 <script>
 import { format, getPageInfo, getEveryPageList } from '@/utils'
-import { findStudentNumber, teacherCharm, findPickUpNumber, ElectronicBrand, findAwayRecord, findStudentDetectionInfo, staffPush   } from '@/api'
+import { findStudentNumber, teacherCharm, findPickUpNumber, ElectronicBrand, findAwayRecord, findStudentDetectionInfo, staffPush, findStudentDetectionByAwayRecordInfo  } from '@/api'
 import classtop from '@/components/classtop'//header
 import classtop_1 from '@/components/classtop_1'//header
 import show from '@/components/show'//老师风采
 import chenjiandata from '@/components/chenjiandata'//晨检数据
 import leavedata from '@/components/leavedata'//接送数据
+import studentList from '@/components/studentList'//晨检和刷卡数据
 import classfooter_1 from '@/components/classfooter_1'//footer
 
 const currentview = ['chenjiandata', 'leavedata']
@@ -55,6 +57,7 @@ export default {
       statisticaData: [],
       checksData: [],
       checksData_1:[],
+      checksData_2:[],
       techershow: [],
       cldata: [],
       pushnews:[],
@@ -85,6 +88,7 @@ export default {
     classtop,
     classtop_1,
     chenjiandata,
+    studentList,
     leavedata,
     classfooter_1,
   },
@@ -96,9 +100,6 @@ export default {
       if(this.currentPage > this.pageInfo.pageTotal) {
         this.currentPage = 1
       }
-      setTimeout(() => {
-        self.getAutoCurentPage()
-      }, 60*1000)
     },
     getNowTime: function() {
       let self = this
@@ -118,35 +119,49 @@ export default {
         window.console.log(error)
       })
     },
-    // 晨检人数统计
-    // classData() {
-    //   let self = this
-    //   findStudentNumber(this.authorization,this.code, res => {
-    //     self.cldata = res.data.data
-    //   }, error => {
-    //     window.console.log(error)
-    //   })
-    // },
-    // 晨检列表信息
     checkData() {
       let self = this
-      findStudentDetectionInfo(this.authorization,this.code, res => {
-        let list = res.data.data.list
-        self.checksData = list
-        //过滤只显示已经到校的
-        // self.checksData_1 = list.filter(val => {
-        //   return val.created && val.parentName
-        // })
-        self.getAutoCurentPage()
+      findStudentDetectionByAwayRecordInfo(this.authorization, this.code, res => {
+        self.checksData_2 = res.data.data.list.sort(function sortByDetectionCreated(val1, val2) {
+          let value1 = (val1.detectionCreated?val1.detectionCreated.replace(":", ""):0) - 0
+          let value2 = (val2.detectionCreated?val2.detectionCreated.replace(":", ""):0) - 0
+
+          return value2 - value1
+        })
       }, error => {
+        self.checkData()
         window.console.log(error)
       })
+    },
+    //晨检人数统计
+    classData() {
+      let self = this
       findStudentNumber(this.authorization,this.code, res => {
         self.cldata = res.data.data
       }, error => {
         window.console.log(error)
       })
     },
+    // 晨检列表信息
+    // checkData() {
+    //   let self = this
+    //   findStudentDetectionInfo(this.authorization,this.code, res => {
+    //     let list = res.data.data.list
+    //     self.checksData = list
+    //     //过滤只显示已经到校的
+    //     // self.checksData_1 = list.filter(val => {
+    //     //   return val.created && val.parentName
+    //     // })
+    //     // self.getAutoCurentPage()
+    //   }, error => {
+    //     window.console.log(error)
+    //   })
+      // findStudentNumber(this.authorization,this.code, res => {
+      //   self.cldata = res.data.data
+      // }, error => {
+      //   window.console.log(error)
+      // })
+    // },
     //文章推送
     staffPush() {
       // 老师推送获取信息
@@ -176,23 +191,22 @@ export default {
         })
     },
     //接送信息
-    getStudentAway() {
-      let self = this
-      // 接送列表信息
-      findAwayRecord(this.authorization,this.code, res => {
-        let list = res.data.data.list
-        self.checksData = list
-        // self.$refs.studentDetection.check();
-      }, error => {
-        window.console.log(error)
-      })
-      // 接送人数统计
-      findPickUpNumber(this.authorization,this.code, res => {
-        self.cldata = res.data.data
-      }, error => {
-        window.console.log(error)
-      })
-    },
+    // getStudentAway() {
+    //   let self = this
+    //   // 接送列表信息
+    //   findAwayRecord(this.authorization,this.code, res => {
+    //     let list = res.data.data.list
+    //     self.checksData = list
+    //   }, error => {
+    //     window.console.log(error)
+    //   })
+    //   // 接送人数统计
+    //   findPickUpNumber(this.authorization,this.code, res => {
+    //     self.cldata = res.data.data
+    //   }, error => {
+    //     window.console.log(error)
+    //   })
+    // },
     getCurrentStudentAway() {
       this.$http.post(`${IPCode}/base/electronicbrand/post/findNewAwayRecord/${this.code}`).then((response) => {
         response = response.data;
@@ -248,12 +262,13 @@ export default {
   },
   watch: {
     nowtime: function(newVal, oldVal) {
-      if ('12:00:00' > format(newVal, 'HH:mm:ss')) {
+      if ('18:00:00' > format(newVal, 'HH:mm:ss')) {
+        this.currentPage = 1
         this.flag = 1
         this.currentview = currentview[0]
         this.change = change[0]
       }
-      if (format(newVal, 'HH:mm:ss') >= '12:00:00') {
+      if (format(newVal, 'HH:mm:ss') >= '18:00:00') {
         clearInterval(this.setIntervalObg.checkDataObg);
         // -------方案一
         // this.connect();
@@ -264,6 +279,7 @@ export default {
           this.setGetCurrentStudentAway();
         }
         this.isFirst = true;
+        this.currentPage = 1
         this.flag = 2
         this.currentview = currentview[1]
         this.change = change[1]
@@ -288,15 +304,12 @@ export default {
       // var d = [a,b,c,e]
       // console.log(d)
       // return a
-      // 2 getEveryPageList(this.checksData, 2, this.pageInfo)
-      // 3 getEveryPageList(this.checksData, 3, this.pageInfo)
-      // list = [1,2,3]  // 1 list[0] 
     },
   },
   created() {
       let self = this
-      // console.log(this.getCurentPageList_1)
       this.getNowTime()
+      this.classData()
       this.checkData()
       this.showData()
       this.staffPush()
@@ -307,26 +320,29 @@ export default {
       this.setIntervalObg.checkDataObg = setInterval(function(){
         self.checkData()
       },setTimeoutsort)
+      setInterval(() => {
+        self.getAutoCurentPage()
+      }, 60*1000)
 
-    //文章内容大于外框时，向上滚动
-    $(document).ready(function (){
-      ddd()
-      setInterval(ddd,60*1000);
-    });
-    function ddd(){
-        var het = document.getElementById('push-content').scrollHeight;
-        var newhet = parseInt(het)
-        var aaa = parseInt( newhet / 800 )
-        if( newhet>800 ){
+      //文章内容大于外框时，向上滚动
+      $(document).ready(function (){
+        ddd()
+        setInterval(ddd,60*1000);
+      });
+      function ddd(){
+          var het = document.getElementById('push-content').scrollHeight;
+          var newhet = parseInt(het)
+          var aaa = parseInt( newhet / 800 )
+          if( newhet>800 ){
+            $("#scroll-content").animate({
+              "top": -(newhet-800),
+            },aaa*30000)
+          }
           $("#scroll-content").animate({
-            "top": -(newhet-800),
-          },aaa*30000)
-        }
-        $("#scroll-content").animate({
-          "top": 0,
-        },3*1000)
+            "top": 0,
+          },3*1000)
 
-    };
+      };
     }
 }
   //处理网络异常（断网），查询不到数据
@@ -377,7 +393,7 @@ img{
 }
 .show_right {
   float: right;
-  width: 66%;
+  width: 68%;
   height: 470px;
   background-color: #fff;
   padding: 10px 0px;

@@ -64,11 +64,15 @@
   background-color: #fff
 }
 #outBox_1 .el-table,#outBox_1 .el-table td{
+  /*border-bottom: 1px solid #eee;*/
   border:0
 }
 .outBox_2 .room .el-table th.is-leaf{
+  /*border-bottom: 1px solid #eee*/
   border:0
+  
 }
 .outBox_3 .kitchen .el-table th.is-leaf{
+  /*border-bottom: 1px solid #eee*/
   border:0
 }

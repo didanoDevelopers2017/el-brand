@@ -52,8 +52,25 @@ export function findKitchenBrand (authorization,code, cb, eb) {
   commonAPI('/base/ElectronicClassBrand/post/findKitchenBrand', authorization, code, cb, eb)
 }
 
+/**
+ * 查询班级到校情况
+ * @param  {[type]}   code [description]
+ * @param  {Function} cb   [description]
+ * @param  {[type]}   eb   [description]
+ * @return {[type]}        [description]
+ */
+export function findKitchenBrandByClassNumber (authorization,code, cb, eb) {
+  commonAPI('/base/ElectronicClassBrand/post/findKitchenBrandByClassNumber', authorization, code, cb, eb)
+}
+
 // 班级电子班排API
 
+/**
+ * 班级晨检、家长刷卡信息
+ */
+export function findStudentDetectionByAwayRecordInfo (authorization,code, cb, eb) {
+  commonAPI('/base/ElectronicClassBrand/post/findStudentDetectionByAwayRecordInfo', authorization, code, cb, eb)
+}
 /**
  * 接送信息
  */

@@ -75,17 +75,17 @@ export default {
 .tb_left {
   float: left;
   width: 100%;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #222
+  /*margin-bottom: 20px;*/
+  /*border-bottom: 1px solid #222*/
 }
 .test{
   color: #3a7ae2 !important;
 }
 
-#tongji_1 {
+/*#tongji_1 {
   text-align: left;
   padding: 10px
-}
+}*/
 
 </style>
 

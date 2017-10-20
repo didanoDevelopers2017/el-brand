@@ -48,16 +48,12 @@ import statistical from '@/components/statistical'
 		      	if(this.currentPage > this.pageInfo.pageTotal) {
 		        	this.currentPage = 1
 		      	}
-		      	setTimeout(() => {
-		        	self.getAutoCurentPage()
-		      	}, 60*1000)
 		    },
 		    //获取列表数据
 			fetchData(){
 				let self = this
 				findHealthRoom(this.authorization,this.code, res => {
 					self.items=res.data.data.list
-					self.getAutoCurentPage()
 				}, error => {
 					window.console.log(error)
 				})
@@ -90,6 +86,9 @@ import statistical from '@/components/statistical'
 				self.fetchData()
 				self.getData()
 			},setTimeoutsort)
+			setInterval(() => {
+		        self.getAutoCurentPage()
+		    }, 60*1000)
 	    }
 	}
 	//处理网络异常（断网），查询不到数据
