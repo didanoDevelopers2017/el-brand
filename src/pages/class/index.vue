@@ -319,6 +319,8 @@ export default {
       },setTimeoutLong);
       this.setIntervalObg.checkDataObg = setInterval(function(){
         self.checkData()
+        self.classData()
+        // console.log(111111)
       },setTimeoutsort)
       setInterval(() => {
         self.getAutoCurentPage()

@@ -23,7 +23,7 @@
                     </el-table-column>
                     <el-table-column
                       prop="detectionCreated"
-                      width="195"
+                      width="205"
                       sortable='custom'
                       align="center">
                     </el-table-column>
@@ -107,6 +107,7 @@ export default {
     }
   }
   .footer{
+    margin-top: 10px;
     li{
       list-style: none;
       text-align: left;
@@ -139,20 +140,23 @@ export default {
           text-align:justify;
           list-style: none;
           padding-bottom:20px;
+          .cell{
+            padding:0
+          }
           #studetlist{
             width: 100%;
             font-size: 16px;
             overflow: auto;
             left:100;
             position:absolute;
+            td{
+              height: 30px
+            }
             .info-row {
               background: #fff;
             };
             .positive-row {
               background: #e9eff5;
-            };
-            td{
-              height: 30px
             };
             .el-form--inline .el-form-item{
               display: table-row-group
@@ -170,6 +174,9 @@ export default {
               margin-right: 55px
             }
           };
+          #studetlist::after{
+              background:#fff
+          }
       }
   }
 }
