@@ -6,7 +6,7 @@
 	      <el-carousel height="420px" arrow="never" indicator-position="none">
 	        <el-carousel-item v-for="(item, index) in showdata" :key="index">
 	          <div>
-	            <div id="image"><img :src="item.imgUrl"></div>
+	            <div id="image" :class="getSstyle(item)"><img :src="item.imgUrl"></div>
 	            <h4 style="font-weight: bold;">{{item.name}}老师</h4>
 	            <div class="describe">　　{{item.instructions}}</div>
 	          </div>
@@ -23,11 +23,24 @@ export default {
   data() {
     return {}
   },
-  props: ['showdata']
+  props: ['showdata'],
+  methods:{
+    //当头像地址为空时，不显示圆边框
+    getSstyle(item){
+      let self = this
+      if(item.imgUrl !== ''){
+        return 'style1'
+      }
+      return ''
+    }
+  }
 }
 </script>
 
 <style>
+img{
+  width: 100%
+}
 .el-carousel {
   indicator-position: none;
   width: 94%;
@@ -44,9 +57,14 @@ h4{
   border-radius:80PX;
   width: 80px;
   height: 80px !important;
+  /*border: 2px solid #ccc;*/
+}
+.style1 img{
+  border-radius:80PX;
+  width: 80px;
+  height: 80px !important;
   border: 2px solid #ccc;
 }
-
 .title {
   text-align: center;
   background-color: #F08080;

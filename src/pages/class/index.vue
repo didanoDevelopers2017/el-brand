@@ -7,7 +7,7 @@
       <component v-bind:is="change" :checksData="checksData_1" :moroing="cldata" id="tops"></component><!-- header -->
       <div class="conTent">
         <div id="teahershow">
-          <transition name="fade"><!-- 教师风采 -->
+          <transition name="fade" mode="out-in"><!-- 教师风采 -->
             <show :showdata="techershow"></show>
           </transition>
           <transition name="fade" mode="out-in"><!-- 晨检/接送数据 -->
