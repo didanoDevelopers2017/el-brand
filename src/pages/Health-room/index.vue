@@ -34,7 +34,7 @@ import statistical from '@/components/statistical'
 				currentPage: 1,
 				offlineShow:false,
 		      	pageInfo: {
-			        pageSize: 20,
+			        pageSize: 19,
 			        pageTotal: 1
 		      	},
 		      	authorization: this.$route.query.authorization,

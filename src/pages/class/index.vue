@@ -413,7 +413,8 @@ img{
 .pushtitle{
   text-align:center;
   font-size: 26px;
-  margin-bottom:20px
+  margin-bottom:20px;
+  font-weight: bold;
 }
 #scroll-wrap {
     overflow: hidden;
@@ -435,8 +436,8 @@ img{
     margin-right:45px;
     padding-bottom: 20px;
     li {
-        line-height: 30px;
-        text-align:justify;
+        line-height: 36px;
+        text-align:left;
         list-style: none;
         padding-bottom:20px;
         padding:40px;

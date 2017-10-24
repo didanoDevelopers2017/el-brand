@@ -3,7 +3,7 @@
     <el-table :data="list" :fit ="false" id="kitchenList" :row-class-name="tableRowClassName">
       <el-table-column prop="studentName" label="姓 名" align="center" width="180px"></el-table-column>
       <el-table-column prop="className" label="班 级" align="center" width="180px"></el-table-column>
-      <el-table-column label="到校时间" align="center" width="180px">
+      <el-table-column label="晨检时间" align="center" width="180px">
         <template scope="scope">
           <span>{{ getState(scope) }}</span>
         </template>
@@ -30,7 +30,7 @@ export default {
   props: ['list', 'List_1'],
   methods: {
     getState(scope) {
-      return scope.row.created ? scope.row.created : '未到校'
+      return scope.row.created ? scope.row.created : '未晨检'
     },
     getclass(scope){
       return `${scope.row.className}(总人数:${scope.row.studentNumber}人,已晨检:${scope.row.schoolNumber}人,未晨检:${scope.row.beforeNumber}人)`
@@ -63,7 +63,13 @@ export default {
   font-size: 16px;
   // border: 0;
   top: 0;
-  // margin-right: 60px
+  // margin-right: 60px;
+  td{
+    height: 35px
+  };
+}
+#classList::after{
+  background-color:#FDF5E6
 }
 .healthtable .el-table {
   border: 0;

@@ -3,7 +3,7 @@
     <el-table :data="items">
       <el-table-column prop="studentName" label="姓 名" align="center"></el-table-column>
       <el-table-column prop="className" label="班 级" align="center"></el-table-column>
-      <el-table-column prop="created" label="到校时间" align="center">
+      <el-table-column prop="created" label="晨检时间" align="center">
         <template scope="scope">
           <span>{{getState(scope)}}</span>
         </template>
@@ -19,7 +19,7 @@ export default {
   props:['items'],
   methods: {
     getState(scope) {
-      return scope.row.created?scope.row.created:'未到校'
+      return scope.row.created?scope.row.created:'未晨检'
     }
   }
 }
@@ -35,6 +35,7 @@ export default {
   border: 0;
   margin-right: 200px;
   background-color:#FDF5E6;
+  font-size: 16px;
   height:680px;
 }
 .healthtable .el-table td{
