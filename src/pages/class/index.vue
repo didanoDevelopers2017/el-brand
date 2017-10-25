@@ -262,13 +262,13 @@ export default {
   },
   watch: {
     nowtime: function(newVal, oldVal) {
-      if ('18:00:00' > format(newVal, 'HH:mm:ss')) {
+      if ('12:00:00' > format(newVal, 'HH:mm:ss')) {
         this.currentPage = 1
         this.flag = 1
         this.currentview = currentview[0]
         this.change = change[0]
       }
-      if (format(newVal, 'HH:mm:ss') >= '18:00:00') {
+      if (format(newVal, 'HH:mm:ss') >= '12:00:00') {
         clearInterval(this.setIntervalObg.checkDataObg);
         // -------方案一
         // this.connect();
