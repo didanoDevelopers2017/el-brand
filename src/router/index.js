@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/pages/class/index'
+import index from '@/pages/Health-room/home'
 
 Vue.use(Router)
 

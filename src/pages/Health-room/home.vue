@@ -4,11 +4,10 @@
 	      <img src="static/img/offline.jpg" style="margin:auto">
 	    </div>
 		<div class="room">
-			<p class="roomtitle">{{classs}}</p>
+			<h3 class="roomtitle">{{classs}}</h3>
 			<div class="dAta">
 				<statistical :statisticaData="statisticaData"></statistical>
-				<!-- <health :items="getCurentPageList"></health> -->
-				<kitchen :items="getCurentPageList"></kitchen>
+				<kitchen :list="getCurentPageList" :List_1="List_1"></kitchen>
 			</div>
 			<classfooter :statisticaData="statisticaData"></classfooter>
 		</div>
@@ -16,83 +15,97 @@
 </template>
 <script>
 import { getPageInfo, getEveryPageList } from '@/utils'
-import {findHealthRoom, findStudentNumber} from '@/api'
-// import health from '@/components/health'
+import {findKitchenBrand, findStudentNumber, findKitchenBrandByClassNumber} from '@/api'
 import kitchen from '@/components/kitchen'
 import classfooter from '@/components/classfooter'
 import statistical from '@/components/statistical'
 	export default{
-		name:'room',
+		name:'kitchenkitchen',
 		components:{
-    		health,
     		kitchen,
     		classfooter,
     		statistical,
  		},
 		data(){
 			return{
-				items:[],
+				list: [],
+				List_1:[],
 				statisticaData:[],
 				classs:'保健室',
 				currentPage: 1,
 				offlineShow:false,
-		      	pageInfo: {
-			        pageSize: 19,
-			        pageTotal: 1
-		      	},
-		      	authorization: this.$route.query.authorization,
+      			pageInfo: {
+        			pageSize: 19,
+        			pageTotal:1
+      			},
+      			authorization: this.$route.query.authorization,
       			code: this.$route.query.code
 			}
 		},
 		methods: {
 			getAutoCurentPage: function() {
-		      	let self = this
-		      	this.currentPage++
-		      	if(this.currentPage > this.pageInfo.pageTotal) {
-		        	this.currentPage = 1
-		      	}
-		    },
-		    //获取列表数据
-			fetchData(){
+		      let self = this
+		      this.currentPage++
+		      if(this.currentPage > this.pageInfo.pageTotal) {
+		        this.currentPage = 1
+		      }
+			},
+			//获取特殊学生列表数据
+		    fetchData() {
 				let self = this
-				findHealthRoom(this.authorization,this.code, res => {
-					self.items=res.data.data.list
+				findKitchenBrand(this.authorization,this.code, res => {
+					// self.getAutoCurentPage()
+					self.list = res.data.data.list
+					// window.console.log(res)
 				}, error => {
 					window.console.log(error)
 				})
-			},
-			//获取校园人数数据
-			getData(){
+		    },
+		    //获取班级到校情况人数
+		    classData() {
+				let self = this
+				findKitchenBrandByClassNumber(this.authorization,this.code, res => {
+					// self.getAutoCurentPage()
+					self.List_1 = res.data.data.list
+					// window.console.log(res)
+				}, error => {
+					window.console.log(error)
+				})
+		    },
+		    //获取校园人数数据
+		    getData(){
 				let self = this
 				findStudentNumber(this.authorization,this.code, res => {
-					self.statisticaData=res.data.data
+					self.statisticaData = res.data.data
 				}, error => {
 					window.console.log(error)
 				})
-			},
-		},
+			}
+	    },
 		watch:{
-			items:function(val) {
+			list:function(val) {
 		      this.pageInfo = getPageInfo(val.length, this.pageInfo.pageSize)
 		    }
 		},
 		computed: {
-		    getCurentPageList: function() {
-		      return getEveryPageList(this.items, this.currentPage, this.pageInfo)
-		    }
+			getCurentPageList: function() {
+		      return getEveryPageList(this.list, this.currentPage, this.pageInfo)	
+		    },
 		},
-	    created() {
+		created() {
 			let self = this
 			this.fetchData()
 			this.getData()
+			this.classData()
 			setInterval(function() {
 				self.fetchData()
 				self.getData()
+				self.classData()
 			},setTimeoutsort)
 			setInterval(() => {
-		        self.getAutoCurentPage()
-		    }, 60*1000)
-	    }
+			self.getAutoCurentPage()
+			},60*1000)
+		}
 	}
 	//处理网络异常（断网），查询不到数据
 	window.addEventListener('offline', function() {
@@ -106,7 +119,7 @@ import statistical from '@/components/statistical'
 </script>
 <style>
 	.outBox_2{
-		height: 1080px;
+		height: 1080px
 	}
 	#offlineShow_1 img{
 	  position:absolute;
@@ -117,7 +130,7 @@ import statistical from '@/components/statistical'
 	}
 	.dAta{
 		background-color: #FDF5E6;
-		margin: 0 30px;
+		margin: -15px 40px;
 		border-radius:10px;
 		border:1px solid #eee8aa;
 	}
@@ -125,16 +138,6 @@ import statistical from '@/components/statistical'
 		text-align: left;
 		border-bottom: 1px solid #ccc;
 		padding-bottom: 10px;
-		padding-left: 8%;
-	}
-	.roomtitle{
-		line-height: 210px;
-		width: 30%;
-		margin: auto;
-		height: 155px;
-		text-align: center;
-		color: #fff;
-		font-size: 240%;
-		margin-bottom: 50px
+		padding-left: 70px;
 	}
 </style>

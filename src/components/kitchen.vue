@@ -4,7 +4,7 @@
       <el-table-column prop="studentName" label="姓 名" align="center" width="180px"></el-table-column>
       <el-table-column prop="className" label="班 级" align="center" width="180px"></el-table-column>
       <el-table-column label="晨检时间" align="center" width="180px">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{ getState(scope) }}</span>
         </template>
       </el-table-column>
@@ -14,7 +14,7 @@
     </el-table>
     <el-table :data="List_1" :fit ="false" id="classList" :show-header="false">
       <el-table-column prop="specialCare" align="left" width="448px">
-        <template scope="scope">
+        <template slot-scope="scope">
           <span>{{ getclass(scope) }}</span>
         </template>
       </el-table-column>
