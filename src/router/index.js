@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/pages/Health-room/home'
+// import index from '@/pages/Health-room/home'
+import index from '@/pages/class/index'
 
 Vue.use(Router)
 
@@ -11,11 +12,11 @@ export default new Router({
       name: 'index',
       component: index,
     },
-    // {
-    //   path: '/class',
-    //   name: 'classindex',
-    //   component: () => import('@/pages/class/index')
-    // },
+    {
+      path: '/class',
+      name: 'classindex',
+      component: () => import('@/pages/class/index')
+    },
     //  {
     //   path: '/Health-room',
     //   name: 'Health-roomindex',

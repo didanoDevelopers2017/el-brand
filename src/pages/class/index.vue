@@ -191,27 +191,27 @@ export default {
         })
     },
     //接送信息
-    // getStudentAway() {
-    //   let self = this
-    //   // 接送列表信息
-    //   findAwayRecord(this.authorization,this.code, res => {
-    //     let list = res.data.data.list
-    //     self.checksData = list
-    //   }, error => {
-    //     window.console.log(error)
-    //   })
-    //   // 接送人数统计
-    //   findPickUpNumber(this.authorization,this.code, res => {
-    //     self.cldata = res.data.data
-    //   }, error => {
-    //     window.console.log(error)
-    //   })
-    // },
+    getStudentAway() {
+      let self = this
+      // 接送列表信息
+      findAwayRecord(this.authorization,this.code, res => {
+        let list = res.data.data.list
+        self.checksData = list
+      }, error => {
+        window.console.log(error)
+      })
+      // 接送人数统计
+      findPickUpNumber(this.authorization,this.code, res => {
+        self.cldata = res.data.data
+      }, error => {
+        window.console.log(error)
+      })
+    },
     getCurrentStudentAway() {
       this.$http.post(`${IPCode}/base/electronicbrand/post/findNewAwayRecord/${this.code}`).then((response) => {
         response = response.data;
         if(response.success){
-          console.log(response.data.num);
+          // console.log(response.data.num);
           this.isConnect = true;
           // this.checksData_1 = this.checksData_1.concat(response.data.list);
           this.checksData_1 = response.data.list;

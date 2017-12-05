@@ -31,9 +31,9 @@
                       prop="list"
                       align="center"
                       :default-expand-all="true">
-                      <template scope="scope">
+                      <template slot-scope="scope">
                         <el-form inline class="demo-table-expand">
-                          <el-form-item v-for="(item, index) in scope.row.list">
+                          <el-form-item v-for="(item, index) in scope.row.list" :key="index">
                             <span>{{ getparent(item) }}</span>
                           </el-form-item>
                         </el-form>
