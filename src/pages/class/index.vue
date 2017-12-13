@@ -115,7 +115,7 @@ export default {
       teacherCharm(this.authorization,this.code, res => {
         self.techershow = res.data.data.list
       }, error => {
-        self.showData()
+        // self.showData()
         window.console.log(error)
       })
     },
@@ -129,7 +129,7 @@ export default {
           return value2 - value1
         })
       }, error => {
-        self.checkData()
+        // self.checkData()
         window.console.log(error)
       })
     },
@@ -186,7 +186,7 @@ export default {
             $("iframe").attr("src", html_src);
           });
         }, error => {
-          self.staffPush()
+          // self.staffPush()
           window.console.log(error)
         })
     },
