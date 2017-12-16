@@ -191,22 +191,22 @@ export default {
         })
     },
     //接送信息
-    getStudentAway() {
-      let self = this
-      // 接送列表信息
-      findAwayRecord(this.authorization,this.code, res => {
-        let list = res.data.data.list
-        self.checksData = list
-      }, error => {
-        window.console.log(error)
-      })
-      // 接送人数统计
-      findPickUpNumber(this.authorization,this.code, res => {
-        self.cldata = res.data.data
-      }, error => {
-        window.console.log(error)
-      })
-    },
+    // getStudentAway() {
+    //   let self = this
+    //   // 接送列表信息
+    //   findAwayRecord(this.authorization,this.code, res => {
+    //     let list = res.data.data.list
+    //     self.checksData = list
+    //   }, error => {
+    //     window.console.log(error)
+    //   })
+    //   接送人数统计
+    //   findPickUpNumber(this.authorization,this.code, res => {
+    //     self.cldata = res.data.data
+    //   }, error => {
+    //     window.console.log(error)
+    //   })
+    // },
     getCurrentStudentAway() {
       this.$http.post(`${IPCode}/base/electronicbrand/post/findNewAwayRecord/${this.code}`).then((response) => {
         response = response.data;
@@ -262,12 +262,12 @@ export default {
   },
   watch: {
     nowtime: function(newVal, oldVal) {
-      if ('12:00:00' > format(newVal, 'HH:mm:ss')) {
-        this.currentPage = 1
-        this.flag = 1
-        this.currentview = currentview[0]
-        this.change = change[0]
-      }
+      // if ('12:00:00' > format(newVal, 'HH:mm:ss')) {
+      //   this.currentPage = 1
+      //   this.flag = 1
+      //   this.currentview = currentview[0]
+      //   this.change = change[0]
+      // }
       if (format(newVal, 'HH:mm:ss') >= '12:00:00') {
         clearInterval(this.setIntervalObg.checkDataObg);
         // -------方案一
@@ -284,10 +284,10 @@ export default {
         this.currentview = currentview[1]
         this.change = change[1]
         let self = this;
-        this.getStudentAway();
-        setInterval(function(){
-          self.getStudentAway();
-        },setTimeoutsort)
+        // this.getStudentAway();
+        // setInterval(function(){
+        //   self.getStudentAway();
+        // },setTimeoutsort)
       }
     },
     checksData:function(val) {
@@ -317,6 +317,10 @@ export default {
         self.showData()
         self.staffPush()
       },setTimeoutLong);
+      setInterval(function(){
+        self.checkData()
+        self.classData()
+      },setTimeoutsort);
       this.setIntervalObg.checkDataObg = setInterval(function(){
         self.checkData()
         self.classData()
