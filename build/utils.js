@@ -1,5 +1,6 @@
 var path = require('path')
 var config = require('../config')
+var glob = require('glob')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 exports.assetsPath = function (_path) {
@@ -68,4 +69,16 @@ exports.styleLoaders = function (options) {
     })
   }
   return output
+}
+
+exports.getEntry = function (globPath, pathDir) {
+  var files = glob.sync(globPath)
+  var entries = {}, entry, pathname
+
+  for (var i = 0; i < files.length; i++) {
+    entry = files[i]
+    pathname = pathDir ? entry.replace(new RegExp('^' + pathDir), '') : entry
+    entries[pathname.split('.')[0]] = [entry]
+  }
+  return entries
 }

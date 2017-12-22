@@ -11,7 +11,7 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
 
-module.exports = merge(baseWebpackConfig, {
+let moreConfig = {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
@@ -25,11 +25,26 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: 'index.html',
+    //   inject: true
+    // }),
     new FriendlyErrorsPlugin()
   ]
+}
+
+var pages = Object.keys(utils.getEntry('./src/*.js', './src/'))
+pages.forEach(function (pathname) {
+  var conf = {
+    filename: config.dev[pathname] ? config.dev[pathname] : pathname + '.html', // 生成的html存放路径，相对于path
+    template: 'index.html', // html模板路径
+    inject: true
+  }
+  if (pathname in baseWebpackConfig.entry) {
+    conf.chunks = [pathname]
+  }
+  moreConfig.plugins.push(new HtmlWebpackPlugin(conf))
 })
+
+module.exports = merge(baseWebpackConfig, moreConfig)

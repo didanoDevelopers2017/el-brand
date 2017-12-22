@@ -24,7 +24,7 @@ import statistical from '@/components/statistical'
 	export default{
 		name:'room',
 		components:{
-    		health,
+    		// health,
     		kitchen,
     		classfooter,
     		statistical,

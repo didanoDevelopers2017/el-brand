@@ -4,7 +4,9 @@ var path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
+    classscreen: path.resolve(__dirname, '../dist/classscreen.html'),
+    healthroom: path.resolve(__dirname, '../dist/healthroom.html'),
+    kitchen: path.resolve(__dirname, '../dist/kitchen.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
@@ -23,8 +25,11 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
+    classscreen: path.resolve(__dirname, '../dist/classscreen.html'),
+    healthroom: path.resolve(__dirname, '../dist/healthroom.html'),
+    kitchen: path.resolve(__dirname, '../dist/kitchen.html'),
     port: 8085,
-    autoOpenBrowser: true,
+    autoOpenBrowser: false,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {},
