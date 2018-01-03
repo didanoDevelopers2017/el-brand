@@ -3,7 +3,7 @@
         <div class="sekuai"></div>
         <div class="center">
     	    <div class="logo">
-    	    	<img src="static/img/school_logo.png">
+    	    	<img src="http://cdn-didano.oss-cn-shenzhen.aliyuncs.com/el-brand/school_logo.png">
     	    </div>
     	    <div class="logoname" :data="statisticaData">{{statisticaData.schoolName}}</div>
     	    <div class="daTe">

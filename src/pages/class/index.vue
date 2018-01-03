@@ -1,7 +1,7 @@
 <template>
   <div id="outBox_1" style="position:relative">
     <div v-show="offlineShow" id="offlineShow">
-      <img src="static/img/offline.jpg" style="margin:auto">
+      <img src="http://cdn-didano.oss-cn-shenzhen.aliyuncs.com/el-brand/offline.jpg" style="margin:auto">
     </div>
     <div class="index">
       <component v-bind:is="change" :checksData="checksData_1" :moroing="cldata" id="tops"></component><!-- header -->

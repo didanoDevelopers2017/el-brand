@@ -1,7 +1,7 @@
 <template>
 	<div class="outBox_2">
 	    <div v-show="offlineShow" id="offlineShow_1">
-	      <img src="static/img/offline.jpg" style="margin:auto">
+	      <img src="http://cdn-didano.oss-cn-shenzhen.aliyuncs.com/el-brand/offline.jpg" style="margin:auto">
 	    </div>
 		<div class="room">
 			<h3 class="roomtitle">{{classs}}</h3>
@@ -89,7 +89,7 @@ import statistical from '@/components/statistical'
 		},
 		computed: {
 			getCurentPageList: function() {
-		      return getEveryPageList(this.list, this.currentPage, this.pageInfo)	
+		      return getEveryPageList(this.list, this.currentPage, this.pageInfo)
 		    },
 		},
 		created() {
