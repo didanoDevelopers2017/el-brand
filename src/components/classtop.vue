@@ -1,7 +1,7 @@
 <template>
 	<div class="classtop">
-	  <marquee id="list" scrollamount="15" scrolldelay="100">
-	    <font size=+1 color=#fff v-for="(item, index) in checksData" :key="index">{{ item.studentName }}在 {{ item.created }} 到校</font>
+	  <marquee id="list" scrollamount="15" scrolldelay="150">
+	    <font size=+1 color=#fff v-for="(item, index) in checksData" :key="index">姓名：{{ item.studentName }} 过敏食物：{{ item.specialReasons }} 今日提供食物：{{ item.specialCare }}</font>
 	  </marquee>
 	  <div class="classname">{{moroing.className}}</div>
 	</div>

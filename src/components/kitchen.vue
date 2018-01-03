@@ -9,8 +9,8 @@
         </template>
       </el-table-column>
       <el-table-column prop="specialReasons" label="特殊情况" align="center" width="410px"></el-table-column>
-      <el-table-column prop="specialCare" label="提供餐食" align="center" width="410px"></el-table-column>
-      <el-table-column label="班级晨检情况" align="center" width="410px"></el-table-column>
+      <el-table-column prop="specialCare" label="提供餐食" align="center" width="440px"></el-table-column>
+      <el-table-column label="班级晨检情况" align="center" width="720px"></el-table-column>
     </el-table>
     <el-table :data="List_1" :fit ="false" id="classList" :show-header="false">
       <el-table-column prop="specialCare" align="left" width="448px">
@@ -55,11 +55,11 @@ export default {
   position: relative;
 }
 #classList{
-  width: 448px;
+  width: 475px;
   margin-top: 40px;
   position: absolute;
-  left: 1375px;
-  height: 645px;
+  left: 1575px;
+  height: 745px;
   font-size: 16px;
   // border: 0;
   top: 0;
@@ -75,8 +75,9 @@ export default {
   border: 0;
   margin-right: 0;
   background-color:#FDF5E6;
-  height: 685px;
+  height: 785px;
   font-size: 16px;
+  overflow: hidden;
   .info-row {
   background: #fff;
   };
@@ -100,6 +101,9 @@ export default {
 
 .healthtable .el-table__header-wrapper thead div {
   background-color: #FDF5E6
+}
+.el-table__body-wrapper{
+  overflow: hidden
 }
 
 .healthtable .el-table th {

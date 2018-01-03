@@ -29,6 +29,7 @@ export default {
 .healthtable {
   width: 100%;
   padding-bottom: 10px;
+  font-size: 16px
 }
 
 .healthtable .el-table {
@@ -36,7 +37,7 @@ export default {
   margin-right: 200px;
   background-color:#FDF5E6;
   font-size: 16px;
-  height:680px;
+  height:860px;
 }
 .healthtable .el-table td{
   height: 30px

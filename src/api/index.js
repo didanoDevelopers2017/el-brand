@@ -66,6 +66,12 @@ export function findKitchenBrandByClassNumber (authorization,code, cb, eb) {
 // 班级电子班排API
 
 /**
+ * 班级查询服务--查询班级特殊学生提供的食物
+ */
+export function findStudentFood (authorization,code, cb, eb) {
+  commonAPI('/base/ElectronicClassBrand/post/findStudentFood', authorization, code, cb, eb)
+}
+/**
  * 班级晨检、家长刷卡信息
  */
 export function findStudentDetectionByAwayRecordInfo (authorization,code, cb, eb) {

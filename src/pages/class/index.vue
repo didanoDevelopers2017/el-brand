@@ -38,7 +38,7 @@
 </template>
 <script>
 import { format, getPageInfo, getEveryPageList } from '@/utils'
-import { findStudentNumber, teacherCharm, findPickUpNumber, ElectronicBrand, findAwayRecord, findStudentDetectionInfo, staffPush, findStudentDetectionByAwayRecordInfo  } from '@/api'
+import { findStudentNumber, teacherCharm, findPickUpNumber, ElectronicBrand, findAwayRecord, findStudentDetectionInfo, staffPush, findStudentDetectionByAwayRecordInfo, findStudentFood  } from '@/api'
 import classtop from '@/components/classtop'//header
 import classtop_1 from '@/components/classtop_1'//header
 import show from '@/components/show'//老师风采
@@ -258,16 +258,25 @@ export default {
       setInterval(function(){
         self.getCurrentStudentAway();
       },20*1000)
+    },
+    getStudentFood(){
+      let self = this
+      findStudentFood(this.authorization,this.code, res => {
+        this.checksData_1 = res.data.data.list
+      }, error => {
+        window.console.log(error)
+      })
     }
   },
   watch: {
     nowtime: function(newVal, oldVal) {
-      // if ('12:00:00' > format(newVal, 'HH:mm:ss')) {
-      //   this.currentPage = 1
-      //   this.flag = 1
-      //   this.currentview = currentview[0]
-      //   this.change = change[0]
-      // }
+      if ('12:00:00' > format(newVal, 'HH:mm:ss')) {
+        this.getStudentFood()
+        this.currentPage = 1
+        this.flag = 1
+        // this.currentview = currentview[0]
+        this.change = change[0]
+      }
       if (format(newVal, 'HH:mm:ss') >= '12:00:00') {
         clearInterval(this.setIntervalObg.checkDataObg);
         // -------方案一
@@ -308,6 +317,7 @@ export default {
   },
   created() {
       let self = this
+      // this.getStudentFood()
       this.getNowTime()
       this.classData()
       this.checkData()
@@ -320,6 +330,7 @@ export default {
       setInterval(function(){
         self.checkData()
         self.classData()
+        self.getStudentFood()
       },setTimeoutsort);
       this.setIntervalObg.checkDataObg = setInterval(function(){
         self.checkData()

@@ -35,7 +35,7 @@ import statistical from '@/components/statistical'
 				currentPage: 1,
 				offlineShow:false,
       			pageInfo: {
-        			pageSize: 19,
+        			pageSize: 20,
         			pageTotal:1
       			},
       			authorization: this.$route.query.authorization,
@@ -119,7 +119,7 @@ import statistical from '@/components/statistical'
 </script>
 <style>
 	.outBox_3{
-		height: 1080px
+		/*height: 1080px*/
 	}
 	#offlineShow_1 img{
 	  position:absolute;
@@ -130,9 +130,10 @@ import statistical from '@/components/statistical'
 	}
 	.dAta{
 		background-color: #FDF5E6;
-		margin: -15px 40px;
+		margin: -5px 40px;
 		border-radius:10px;
 		border:1px solid #eee8aa;
+		height:860px;
 	}
 	.Tongji{
 		text-align: left;
