@@ -119,7 +119,7 @@ import statistical from '@/components/statistical'
 </script>
 <style>
 	.outBox_2{
-		/*height: 1080px*/
+		height: 1080px
 	}
 	#offlineShow_1 img{
 	  position:absolute;

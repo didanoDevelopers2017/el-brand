@@ -11,33 +11,34 @@
             <ul id="scroll-content_1">
               <li id="push-content_1">
                 <el-table
-                  :data="checksData"
-                  id="studetlist"
-                  type="expand"
-                  :row-class-name="tableRowClassName"
-                  :show-header="false">
-                  <el-table-column
-                    prop="studentName"
-                    width="195"
-                    align="center">
-                  </el-table-column>
-                  <el-table-column
-                    prop="detectionCreated"
-                    sortable='custom'
-                    align="center">
-                  </el-table-column>
-                  <el-table-column
-                    prop="list"
-                    align="center"
-                    :default-expand-all="true">
-                    <template slot-scope="scope">
-                      <el-form inline class="demo-table-expand">
-                        <el-form-item v-for="(item, index) in scope.row.list" :key="index">
-                          <span>{{ getparent(item) }}</span>
-                        </el-form-item>
-                      </el-form>
-                    </template>
-                  </el-table-column>
+                    :data="checksData"
+                    id="studetlist"
+                    type="expand"
+                    :row-class-name="tableRowClassName"
+                    :show-header="false">
+                    <el-table-column
+                      prop="studentName"
+                      width="195"
+                      align="center">
+                    </el-table-column>
+                    <el-table-column
+                      prop="detectionCreated"
+                      width="205"
+                      sortable='custom'
+                      align="center">
+                    </el-table-column>
+                    <el-table-column
+                      prop="list"
+                      align="center"
+                      :default-expand-all="true">
+                      <template slot-scope="scope">
+                        <el-form inline class="demo-table-expand">
+                          <el-form-item v-for="(item, index) in scope.row.list" :key="index">
+                            <span>{{ getparent(item) }}</span>
+                          </el-form-item>
+                        </el-form>
+                      </template>
+                    </el-table-column>
                 </el-table>
               </li>
             </ul>
@@ -130,7 +131,7 @@ export default {
       position:absolute;
       left:0;
       top:0;
-      width:94.5%;
+      width:94.4%;
       height:100%;
       margin-right:45px;
       padding-bottom: 20px;
