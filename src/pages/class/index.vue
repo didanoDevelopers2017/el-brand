@@ -73,8 +73,8 @@ export default {
         pageTotal: 1
       },
       flag: 0,
-      code: this.$route.query.code,
-      authorization: this.$route.query.authorization,
+      code: this.$route.query.code,//获取当前页code码
+      authorization: this.$route.query.authorization,//获取当前页授权码
       ws: '',
       setIntervalObg:{
         checkDataObg:'',

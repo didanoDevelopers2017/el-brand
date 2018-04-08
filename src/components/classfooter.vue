@@ -3,7 +3,7 @@
         <div class="sekuai"></div>
         <div class="center">
           <div class="logo">
-              <img src="http://cdn-didano.oss-cn-shenzhen.aliyuncs.com/el-brand/school_logo.png">
+              <img :src="statisticaData.logo">
           </div>
           <div class="logoname" :data="statisticaData">{{statisticaData.schoolName}}</div>
           <div class="daTe">
@@ -23,7 +23,7 @@ export default {
     return {
       nowtime: format(new Date, 'hh:mm'),
       noweek: format(new Date, 'EEEE'),
-      newdate: format(new Date, 'YYYY- MM - DD')
+      newdate: format(new Date, 'YYYY - MM - DD')
     }
   },
   props: ['statisticaData'],

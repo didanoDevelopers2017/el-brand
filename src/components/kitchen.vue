@@ -61,9 +61,9 @@ export default {
   left: 1375px;
   height: 645px;
   font-size: 16px;
-  // border: 0;
+  /* border: 0; */
   top: 0;
-  // margin-right: 60px;
+  /* margin-right: 60px; */
   td{
     height: 35px
   };
