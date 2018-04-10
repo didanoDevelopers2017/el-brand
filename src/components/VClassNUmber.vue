@@ -1,12 +1,6 @@
 <template>
   <div class="VhealthtableClass">
-    <el-row class="bigtitle">
-      <el-col :span="6">班 级</el-col>
-      <el-col :span="6">总人数(人)</el-col>
-      <el-col :span="6">已晨检(人)</el-col>
-      <el-col :span="6">未晨检(人)</el-col>
-    </el-row>
-    <div id="scrollTop">
+    <!-- <div id="scrollTop">
       <ul id="scroll-content">
         <li id="push-content">
           <el-row id="helthClass">
@@ -19,7 +13,15 @@
           </el-row>
         </li>
       </ul>
-    </div>
+    </div> -->
+    <el-row id="helthClass">
+        <el-row  v-for="(item,index) in items" :key="index" :class="ClassName(index)">
+          <el-col :span="6">{{ item.className }}</el-col>
+          <el-col :span="6">{{ item.studentNumber }}</span></el-col>
+          <el-col :span="6">{{ item.schoolNumber }}</span></el-col>
+          <el-col :span="6">{{ item.beforeNumber }}</span></el-col>
+        </el-row>
+    </el-row>
   </div>
 </template>
 
@@ -67,48 +69,19 @@ export default {
 
 <style lang="scss">
 .VhealthtableClass {
+  padding:0;
+  width: 92.5%;
   line-height:32px;
   margin: auto;
-  .bigtitle{
-    padding-left:6%;
-    width:94%;
-    font-weight: bold;
-  }
-  #scrollTop {
-    overflow-y: hidden;
-    height: 500px;
-    position: relative;
-  }
-  #scroll-content {
-    position: absolute;
-    left: -22px;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 20px;
-    #push-content {
-      line-height: 30px;
-      list-style: none;
-      padding-bottom: 20px;
-      .cell {
-        padding: 0
-      }
-      #helthClass {
-        width: 91.1%;
-        padding-left: 2%;
-        font-size: 16px;
-        overflow: auto;
-        position: absolute;
-        .info-row {
-          background: #fff;
-          padding:0 2%
-        };
-        .positive-row {
-          background: #FDF5E6;
-          padding:0 2%
-        };
-      }
-    }
-  }
+}
+#kitchenTable {
+  font-size: 16px;
+  overflow: auto;
+}
+.info-row {
+    background: #fff;
+}
+.positive-row {
+  background: #FDF5E6;
 }
 </style>
