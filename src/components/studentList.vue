@@ -11,7 +11,7 @@
         <ul id="scroll-content_1">
           <li id="push-content_1">
             <el-row id="studetlist">
-              <el-row  v-for="(item,index) in checksData" :key="index":class="tableRowClassName(index)">
+              <el-row  v-for="(item,index) in dataList" :key="index":class="tableRowClassName(index)">
                 <el-col :span="8">{{ item.studentName }}</el-col>
                 <el-col :span="8">{{ item.detectionCreated }}</el-col>
                 <el-col :span="8">
@@ -46,13 +46,17 @@
 </template>
 
 <script>
+  import { findStudentDetectionByAwayRecordInfo,findStudentNumber } from '@/api'
   export default {
     data() {
       return {
         title: '晨检数据',
+        dataList:[],
+        timeLong:0,
+        cldata:{}
       }
     },
-    props: ['checksData', 'cldata'],
+    props: ['checksData','authorization','code'],
     methods: {
       tableRowClassName(index) {
         if (index % 2 === 0) {
@@ -64,10 +68,52 @@
       },
       getparent(scope) {
         return `${scope.parentName}(${scope.awayCreated})`
+      },
+      //获取列表数据
+      getList(){
+        findStudentDetectionByAwayRecordInfo(this.authorization, this.code, res => {
+          this.dataList = res.data.data.list.sort(function sortByDetectionCreated(val1, val2) {
+            let value1 = (val1.detectionCreated?val1.detectionCreated.replace(":", ""):0) - 0
+            let value2 = (val2.detectionCreated?val2.detectionCreated.replace(":", ""):0) - 0
+            return value2 - value1
+          })
+          this.getheight()
+        }, error => {
+          window.console.log(error)
+        })
+      },
+      //获取数据内容高度
+      getheight(){
+        var het = document.getElementById('studetlist').scrollHeight;
+        var newhet = parseInt(het)
+        this.timeLong = parseInt(newhet / 325)
+      },
+      //获取班级晨检情况
+      classData() {
+        let self = this
+        findStudentNumber(this.authorization,this.code, res => {
+          self.cldata = res.data.data
+        }, error => {
+          window.console.log(error)
+        })
+      },
+    },
+    watch:{
+      timeLong(newVal,oldVal){
+        let self = this
+        if(newVal > 0){
+          let time = this.timeLong * 30000
+          setInterval(function(){
+            self.getList()
+            self.classData()
+            },time);
+        }
       }
     },
     created() {
-      let self = this
+      this.getList()
+      this.classData()
+      setTimeout(this.getList(), 10000);
       //表格内容大于外框时，向上滚动
       $(document).ready(function () {
         ddd()

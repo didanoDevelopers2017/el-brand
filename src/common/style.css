@@ -2,9 +2,19 @@
   background: url(http://cdn-didano.oss-cn-shenzhen.aliyuncs.com/el-brand/1.jpg) no-repeat center;
   height: 100%;
   width: 100%;
-  /* position: fixed;
+  margin: auto;
+  background-size: 100% 100%;
+  overflow-x: hidden;
+  font-size: 14px;
+  list-style: none;
+}
+#outBoxNew{
+  background: url(http://cdn-didano.oss-cn-shenzhen.aliyuncs.com/el-brand/1.jpg) no-repeat center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
   top:0;
-  left:0; */
+  left:0;
   margin: auto;
   background-size: 100% 100%;
   overflow-x: hidden;

@@ -146,10 +146,6 @@
         height: 100%;
         top:0;
         left:0;
-        .scroll-content{
-            position: absolute;
-            width:100%
-        }
         .scroll-content_1{
             position: absolute;
             width:100%

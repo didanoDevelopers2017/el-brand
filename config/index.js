@@ -5,6 +5,7 @@ module.exports = {
   build: {
     env: require('./prod.env'),
     classscreen: path.resolve(__dirname, '../dist/classscreen.html'),
+    classscreennew: path.resolve(__dirname, '../dist/classscreennew.html'),
     healthroom: path.resolve(__dirname, '../dist/healthroom.html'),
     Vhealthroom: path.resolve(__dirname, '../dist/Vhealthroom.html'),
     Vkitchen: path.resolve(__dirname, '../dist/Vkitchen.html'),
@@ -28,6 +29,7 @@ module.exports = {
   dev: {
     env: require('./dev.env'),
     classscreen: path.resolve(__dirname, '../dist/classscreen.html'),
+    classscreennew: path.resolve(__dirname, '../dist/classscreennew.html'),
     healthroom: path.resolve(__dirname, '../dist/healthroom.html'),
     Vhealthroom: path.resolve(__dirname, '../dist/Vhealthroom.html'),
     Vkitchen: path.resolve(__dirname, '../dist/Vkitchen.html'),
