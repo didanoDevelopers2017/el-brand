@@ -114,15 +114,6 @@
               window.console.log(error)
             })
           },
-          //晨检人数统计
-          classData() {
-            let self = this
-            findStudentNumber(this.authorization,this.code, res => {
-              self.cldata = res.data.data
-            }, error => {
-              window.console.log(error)
-            })
-          },
           //文章推送
           staffPush() {
             // 老师推送获取信息
@@ -210,7 +201,16 @@
             }, error => {
               window.console.log(error)
             })
-          }
+          },
+          //获取班级晨检情况
+          classData() {
+            let self = this
+            findStudentNumber(this.authorization,this.code, res => {
+              self.cldata = res.data.data
+            }, error => {
+              window.console.log(error)
+            })
+          },
         },
         watch: {
           nowtime: function(newVal, oldVal) {
@@ -253,6 +253,7 @@
         created() {
             let self = this
             // this.getStudentFood()
+            this.classData()
             this.getNowTime()
             this.showData()
             this.staffPush()

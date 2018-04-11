@@ -4,9 +4,12 @@
       <el-row  v-for="(item,index) in items" :key="index" :class="tableRowClassName(index)">
         <el-col :span="3">{{ item.studentName }}</el-col>
         <el-col :span="3">{{ item.className }}</el-col>
-        <el-col :span="2">{{ item.created }}</span></el-col>
-        <el-col :span="8">{{ item.specialReasons }}</span></el-col>
-        <el-col :span="8">{{ item.specialCare }}</span></el-col>
+        <el-col :span="2">
+          <span v-if="item.created">{{ item.created }}</span>
+          <span v-else> 未晨检 </span>
+        </el-col>
+        <el-col :span="8"><span>{{ item.specialReasons }}</span></el-col>
+        <el-col :span="8"><span>{{ item.specialCare }}</span></el-col>
       </el-row>
     </el-row>
   </div>

@@ -11,7 +11,7 @@
             <show :showdata="techershow"></show>
           </transition>
           <transition name="fade" mode="out-in"><!-- 晨检/接送数据 -->
-            <studentList :checksData="checksData_2" :cldata="cldata"></studentList>
+            <studentList :authorization="authorization" :code="code"></studentList>
             <!-- <component v-bind:is="currentview" id="TableS" :checksData="getCurentPageList" :cldata="cldata"></component> -->
           </transition>
           <div style="clear:both"></div>
@@ -116,20 +116,6 @@ export default {
         self.techershow = res.data.data.list
       }, error => {
         // self.showData()
-        window.console.log(error)
-      })
-    },
-    checkData() {
-      let self = this
-      findStudentDetectionByAwayRecordInfo(this.authorization, this.code, res => {
-        self.checksData_2 = res.data.data.list.sort(function sortByDetectionCreated(val1, val2) {
-          let value1 = (val1.detectionCreated?val1.detectionCreated.replace(":", ""):0) - 0
-          let value2 = (val2.detectionCreated?val2.detectionCreated.replace(":", ""):0) - 0
-
-          return value2 - value1
-        })
-      }, error => {
-        // self.checkData()
         window.console.log(error)
       })
     },
@@ -320,7 +306,7 @@ export default {
       // this.getStudentFood()
       this.getNowTime()
       this.classData()
-      this.checkData()
+      // this.checkData()
       this.showData()
       this.staffPush()
       setInterval(function(){
@@ -328,12 +314,12 @@ export default {
         self.staffPush()
       },setTimeoutLong);
       setInterval(function(){
-        self.checkData()
-        self.classData()
+        // self.checkData()
+        // self.classData()
         self.getStudentFood()
       },setTimeoutsort);
       this.setIntervalObg.checkDataObg = setInterval(function(){
-        self.checkData()
+        // self.checkData()
         self.classData()
         // console.log(111111)
       },setTimeoutsort)

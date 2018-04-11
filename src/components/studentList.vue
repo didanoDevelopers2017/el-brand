@@ -99,8 +99,10 @@
       },
     },
     watch:{
+      //滚动完后刷新
       timeLong(newVal,oldVal){
         let self = this
+        self.classData()
         if(newVal > 0){
           let time = this.timeLong * 30000
           setInterval(function(){
@@ -112,7 +114,6 @@
     },
     created() {
       this.getList()
-      this.classData()
       setTimeout(this.getList(), 10000);
       //表格内容大于外框时，向上滚动
       $(document).ready(function () {
@@ -122,10 +123,10 @@
       function ddd() {
         var het = document.getElementById('studetlist').scrollHeight;
         var newhet = parseInt(het)
-        var aaa = parseInt(newhet / 325)
-        if (newhet > 325) {
+        var aaa = parseInt(newhet / 350)
+        if (newhet > 350) {
           $("#scroll-content_1").animate({
-            "top": -(newhet - 325),
+            "top": -(newhet - 350),
           }, aaa * 20000) //aaa*20000
         }
         $("#scroll-content_1").animate({
