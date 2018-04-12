@@ -5,13 +5,13 @@ module.exports = {
   build: {
     env: require('./prod.env'),
     classscreen: path.resolve(__dirname, '../dist/classscreen.html'),
-    classscreennew: path.resolve(__dirname, '../dist/classscreennew.html'),
+    Vclassscreen: path.resolve(__dirname, '../dist/Vclassscreen.html'),
     healthroom: path.resolve(__dirname, '../dist/healthroom.html'),
     Vhealthroom: path.resolve(__dirname, '../dist/Vhealthroom.html'),
     Vkitchen: path.resolve(__dirname, '../dist/Vkitchen.html'),
     kitchen: path.resolve(__dirname, '../dist/kitchen.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'elBrand/static',
+    assetsSubDirectory: 'electronicBrand/static',
     assetsPublicPath: '../',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
@@ -29,7 +29,7 @@ module.exports = {
   dev: {
     env: require('./dev.env'),
     classscreen: path.resolve(__dirname, '../dist/classscreen.html'),
-    classscreennew: path.resolve(__dirname, '../dist/classscreennew.html'),
+    Vclassscreen: path.resolve(__dirname, '../dist/Vclassscreen.html'),
     healthroom: path.resolve(__dirname, '../dist/healthroom.html'),
     Vhealthroom: path.resolve(__dirname, '../dist/Vhealthroom.html'),
     Vkitchen: path.resolve(__dirname, '../dist/Vkitchen.html'),
