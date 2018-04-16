@@ -14,7 +14,7 @@
                 <el-col :span="8">特殊情况</el-col>
                 <el-col :span="8">提供餐食</el-col>
             </el-row>
-            <div class="scroll-content"><kitchen :items="TableList" id="kitchenTable"></kitchen></div>
+            <div class="scroll-content"><kitchen :items="TableList" id="healthTable"></kitchen></div>
         </div>
         <div class="footCenter">今日各班晨检情况</div>
         <div class="footTable">
@@ -107,7 +107,7 @@
             });
             //厨房信息表格内容大于外框时，向上滚动
             function ddd() {
-              let het = document.getElementById('kitchenTable').scrollHeight;
+              let het = document.getElementById('healthTable').scrollHeight;
               let tableHeight = document.getElementById('toptable').offsetHeight;
               let newhet = parseInt(het)
               let aaa = parseInt(newhet / tableHeight)

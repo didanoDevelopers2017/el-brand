@@ -150,6 +150,10 @@
             position: absolute;
             width:100%
         }
+        .scroll-content{
+            position: absolute;
+            width:100%
+        }
         .bigtitle,.NUmbertitle{
             font-weight: bold;
             width: 93.5%;
