@@ -77,6 +77,7 @@
             },
             isConnect: false,
             isFirst: false,
+            timelength:0
           }
         },
         components: {
@@ -247,8 +248,17 @@
             this.pageInfo = getPageInfo(val.length, this.pageInfo.pageSize)
           },
         },
-        computed: {
-          
+        watch:{
+          //滚动完后刷新
+          timelength(newVal,oldVal){
+            let self = this
+            if(newVal > 0){
+              let time = this.timelength * 36000
+              setInterval(function(){
+                self.staffPush()
+                },time);
+            }
+          }
         },
         created() {
             let self = this
@@ -259,7 +269,7 @@
             this.staffPush()
             setInterval(function(){
               self.showData()
-              self.staffPush()
+              // self.staffPush()
             },setTimeoutLong);
             this.setIntervalObg.checkDataObg = setInterval(function(){
             },setTimeoutsort)
@@ -267,7 +277,7 @@
             //文章内容大于外框时，向上滚动
             $(document).ready(function (){
               ddd()
-              setInterval(ddd,60*1000);
+              setInterval(ddd, 10000);
             });
             function ddd(){
                 var het = document.getElementById('scroll-content').scrollHeight;
@@ -276,12 +286,13 @@
                 var aaa = parseInt( newhet / pushheight )
                 if( newhet > pushheight ){
                   $("#scroll-content").animate({
-                    "top": -(newhet - pushheight),
+                    "top": -((newhet - pushheight) + 300),
                   },aaa*30000)
+                  self.timelength = aaa
+                  $("#scroll-content").animate({
+                    "top": 0,
+                  },3*1000)
                 }
-                $("#scroll-content").animate({
-                  "top": 0,
-                },3*1000)
       
             };
           }
@@ -351,7 +362,7 @@
         width: 96%;
         margin: 0 2%;
         margin-bottom: 30px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
       }
       .pushtitle{
         text-align:center;
@@ -371,7 +382,8 @@
       }
       #scroll-content {
           position:absolute;
-          width:96.5%;
+          width:94%;
+          margin-left: 1.1%;
           height:100%;
           padding-bottom: 20px;
           li {

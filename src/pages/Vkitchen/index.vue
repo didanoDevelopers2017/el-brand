@@ -124,10 +124,10 @@
                 $(".scroll-content_1").animate({
                   "top": -(newhet - 500),
                 }, aaa * 20000) //aaa*20000
+                $(".scroll-content_1").animate({
+                    "top": 0,
+                }, 3 * 1000)
               }
-              $(".scroll-content_1").animate({
-                "top": 0,
-              }, 3 * 1000)
             };
         },
         components:{

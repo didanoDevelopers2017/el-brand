@@ -104,7 +104,7 @@
         let self = this
         self.classData()
         if(newVal > 0){
-          let time = this.timeLong * 30000
+          let time = this.timeLong * 22000
           setInterval(function(){
             self.getList()
             self.classData()
@@ -123,10 +123,10 @@
       function ddd() {
         var het = document.getElementById('studetlist').scrollHeight;
         var newhet = parseInt(het)
-        var aaa = parseInt(newhet / 350)
-        if (newhet > 350) {
+        var aaa = parseInt(newhet / 340)
+        if (newhet > 340) {
           $("#scroll-content_1").animate({
-            "top": -(newhet - 350),
+            "top": -(newhet - 340),
           }, aaa * 20000) //aaa*20000
         }
         $("#scroll-content_1").animate({

@@ -54,6 +54,7 @@ export default {
   .logo img{
     border-radius: 108px;
     border: 1px solid #eee8aa;
+    padding: 1px;
     width: 85px;
     height: 85px;
     float: left;
