@@ -30,12 +30,13 @@ export default {
   methods: {
     getNowTime: function() {
       let self = this
-      setTimeout(() => {
+      setInterval(() => {
         self.nowtime = format(new Date, 'hh:mm')
         self.noweek = format(new Date, 'EEEE')
         self.newdate = format(new Date, 'YYYY - MM - DD')
-        self.getNowTime()
+        console.log(self.noweek,self.newdate,self.nowtime)
       }, 1000 * 60)
+      // console.log(self.noweek,self.newdate,self.nowtime)
     }
   },
   created() {

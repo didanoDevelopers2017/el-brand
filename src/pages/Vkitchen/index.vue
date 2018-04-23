@@ -110,10 +110,10 @@
                 $(".scroll-content").animate({
                   "top": -(newhet - tableHeight),
                 }, aaa * 20000) //aaa*20000
+                $(".scroll-content").animate({
+                    "top": 0,
+                }, 3 * 1000)
               }
-              $(".scroll-content").animate({
-                "top": 0,
-              }, 3 * 1000)
             };
              //厨房信息表格内容大于外框时，向上滚动
             function classNUmber() {
