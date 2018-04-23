@@ -13,7 +13,7 @@
             <el-row id="studetlist">
               <el-row  v-for="(item,index) in dataList" :key="index":class="tableRowClassName(index)">
                 <el-col :span="8">{{ item.studentName }}</el-col>
-                <el-col :span="8">{{ item.detectionCreated }}</el-col>
+                <el-col :span="8">{{ getdetection(item.detectionCreated)}}</el-col>
                 <el-col :span="8">
                   <span v-for="(val, index) in item.list" :key="index">{{ getparent(val) }}<br></span>
                 </el-col>
@@ -69,6 +69,13 @@
       getparent(scope) {
         return `${scope.parentName}(${scope.awayCreated})`
       },
+      getdetection(val){
+        if(val){
+          return `${val}`
+        } else {
+          return '未晨检'
+        }
+      },
       //获取列表数据
       getList(){
         findStudentDetectionByAwayRecordInfo(this.authorization, this.code, res => {
@@ -108,13 +115,21 @@
           setInterval(function(){
             self.getList()
             self.classData()
-            },time);
+          },time);
         }
       }
     },
     created() {
-      this.getList()
-      setTimeout(this.getList(), 10000);
+      let self = this
+      self.getList()
+      self.classData()
+      setTimeout(self.getList(), 10000);
+      if(self.timeLong == 0){
+        setInterval(function(){
+          self.getList()
+          self.classData()
+        },1000*120);
+      }
       //表格内容大于外框时，向上滚动
       $(document).ready(function () {
         ddd()

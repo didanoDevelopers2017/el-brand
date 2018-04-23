@@ -267,6 +267,11 @@
             this.getNowTime()
             this.showData()
             this.staffPush()
+            if(this.timelength == 0){
+              setInterval(function(){
+                self.staffPush()
+              },1000*120);
+            }
             setInterval(function(){
               self.showData()
               // self.staffPush()
