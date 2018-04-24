@@ -21,26 +21,42 @@ export default {
   name: 'classfooter',
   data() {
     return {
-      nowtime: format(new Date, 'hh:mm'),
-      noweek: format(new Date, 'EEEE'),
-      newdate: format(new Date, 'YYYY - MM - DD')
+      nowtime: '',
+      noweek: '',
+      newdate:''
     }
   },
   props: ['statisticaData'],
   methods: {
-    getNowTime: function() {
-      let self = this
-      setInterval(() => {
-        self.nowtime = format(new Date, 'hh:mm')
-        self.noweek = format(new Date, 'EEEE')
-        self.newdate = format(new Date, 'YYYY - MM - DD')
-        console.log(self.noweek,self.newdate,self.nowtime)
-      }, 1000 * 60)
-      // console.log(self.noweek,self.newdate,self.nowtime)
+    // getNowTime: function() {
+    //   let self = this
+    //   setInterval(() => {
+    //     self.nowtime = format(new Date, 'hh:mm')
+    //     self.noweek = format(new Date, 'EEEE')
+    //     self.newdate = format(new Date, 'YYYY - MM - DD')
+    //   }, 1000 * 60)
+    // },
+    //获取服务器时间
+    getNowTimebyApi(){
+      this.$http.post(`http://120.77.237.242:8081/api/service/getSystemTime`).then((response) => {
+        response = response.data;
+        if(response.success){
+          let newTime = response.data.time
+          let stringTime = `${newTime.substring(0,4)}-${newTime.substring(4,6)}-${newTime.substring(6,8)} ${newTime.substring(8,10)}:${newTime.substring(10,12)}:${newTime.substring(12,14)}`
+          this.nowtime = format(new Date(stringTime), 'hh:mm')
+          this.noweek = format(new Date(stringTime), 'EEEE')
+          this.newdate = format(new Date(stringTime), 'YYYY - MM - DD')
+        }
+      })
     }
   },
   created() {
-    this.getNowTime()
+    // this.getNowTime()
+    this.getNowTimebyApi()
+    //一分钟获取一次时间
+    setInterval(() => {
+      this.getNowTimebyApi()
+    }, 1000 * 60)
   }
 }
 </script>
