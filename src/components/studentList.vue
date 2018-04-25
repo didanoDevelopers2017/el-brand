@@ -39,7 +39,7 @@
       </div>
       <ul class="footer">
         <li>当前 {{cldata.className}} 总人数：{{cldata.studentNumber}} 人 已晨检：{{cldata.schoolNumber}} 人 未晨检：{{cldata.beforeNumber}}
-          人</li>
+          人 <span v-if="checkreateShow">晨检率：{{ checkRate() }}</span></li>
       </ul>
     </div>
   </div>
@@ -53,11 +53,20 @@
         title: '晨检数据',
         dataList:[],
         timeLong:0,
-        cldata:{}
+        cldata:{},
+        checkreateShow:true
       }
     },
     props: ['checksData','authorization','code'],
     methods: {
+      checkRate(){
+        if(this.cldata.schoolNumber != undefined && this.cldata.studentNumber != undefined){
+          let aaa = Math.round(this.cldata.schoolNumber / this.cldata.studentNumber * 10000) / 100.00 + "%"
+          return aaa
+        } else {
+          return '%'
+        }
+      },
       tableRowClassName(index) {
         if (index % 2 === 0) {
           return 'info-row';
@@ -120,6 +129,9 @@
       }
     },
     created() {
+      if(this.$route.query.authorization == '129897D438067E99631A23855A5C77CC'){
+         this.checkreateShow = false
+      }
       let self = this
       self.getList()
       self.classData()

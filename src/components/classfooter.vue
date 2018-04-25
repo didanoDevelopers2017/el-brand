@@ -3,7 +3,7 @@
         <div class="sekuai"></div>
         <div class="center">
           <div class="logo">
-              <img :src="statisticaData.logo">
+              <img :src="getLogoUrl(statisticaData.logo)">
           </div>
           <div class="logoname" :data="statisticaData">{{statisticaData.schoolName}}</div>
           <div class="daTe">
@@ -28,6 +28,8 @@ export default {
   },
   props: ['statisticaData'],
   methods: {
+    getLogoUrl(url){
+    },
     // getNowTime: function() {
     //   let self = this
     //   setInterval(() => {
