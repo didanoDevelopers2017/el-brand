@@ -35,6 +35,7 @@ export default {
     },
     //图片进行裁剪
     getImgurl(url){
+      return `${url}?x-oss-process=image/resize,m_mfit,w_100/circle,r_100/format,png`
     }
   },
   created(){

@@ -29,6 +29,7 @@ export default {
   props: ['statisticaData'],
   methods: {
     getLogoUrl(url){
+      return `${url}?x-oss-process=image/resize,m_lfit,h_100,w_100`
     },
     // getNowTime: function() {
     //   let self = this
